@@ -1,7 +1,6 @@
 pipeline{
-    tools{
-        jdk 'myjava'
-        maven 'mymaven'
+    tools{        
+        maven 'MAVEN_HOME'
     }
     agent none
       stages{
@@ -30,14 +29,7 @@ pipeline{
                   sh 'mvn test'
               }
               
-          }
-          stage('MetricCheck'){
-              agent any
-              steps{
-                  sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
-              }
-              
-          }
+          }          
           stage('Package'){
               agent any
               steps{
