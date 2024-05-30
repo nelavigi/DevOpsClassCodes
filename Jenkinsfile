@@ -1,6 +1,6 @@
 pipeline{
     tools{        
-        maven 'MAVEN_HOME'
+        maven 'my_maven'
     }
     agent none
       stages{
