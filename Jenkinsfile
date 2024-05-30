@@ -1,6 +1,7 @@
 pipeline{
     tools{        
         maven 'my_maven'
+        jdk 'my_jdk'
     }
     agent none
       stages{
@@ -13,27 +14,19 @@ pipeline{
           stage('Compile'){
               agent any
               steps{
-                  sh 'mvn compile'
+                  bat 'mvn compile'
               }
-          }
-          stage('CodeReview'){
-              agent any
-              steps{
-                  sh 'mvn pmd:pmd'
-              }
-          }
+          }         
           stage('UnitTest'){
-              agent {label 'linux_slave'}
-              steps{
-                  git 'https://github.com/devops-trainer/DevOpsClassCodes.git'
-                  sh 'mvn test'
-              }
-              
+              agent any
+              steps{                  
+                  bat 'mvn test'
+              }              
           }          
           stage('Package'){
               agent any
               steps{
-                  sh 'mvn package'
+                  bat 'mvn package'
               }
           }
       }
